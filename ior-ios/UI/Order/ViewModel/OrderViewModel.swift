@@ -28,13 +28,13 @@ class OrderViewModel {
         }
     }
     
-    func getUserEditPermission(completion: @escaping (Bool) -> ()) {
+    func getUserPermissions(completion: @escaping (Bool, Bool) -> ()) {
         APIManager.shared.postRequest(mode: APIMode.Backend, endPoint: "/user/\(Settings.userId() ?? "")") { (response, error) in
             //
             
             guard let response = response as? [String: Any] else { return }
             
-            completion(response["permission_to_edit_orders"] as? Bool ?? false)
+            completion(response["permission_to_edit_orders"] as? Bool ?? false, response["permission_to_cancel_orders"] as? Bool ?? false)
         }
     }
     

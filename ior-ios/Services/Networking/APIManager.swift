@@ -11,13 +11,13 @@ import Alamofire
 
 struct APIMode {
     
-    #if DEBUG
-    static let Backend: String = "http://127.0.0.1:3000"
-    static let SocketsBackend: String = "http://127.0.0.1"
-    #else
+//    #if DEBUG
+//    static let Backend: String = "http://127.0.0.1:3000"
+//    static let SocketsBackend: String = "http://127.0.0.1"
+//    #else
     static let Backend: String = "http://188.225.47.101"
     static let SocketsBackend: String = "http://188.225.47.101"
-    #endif
+//    #endif
 }
 
 class APIManager {

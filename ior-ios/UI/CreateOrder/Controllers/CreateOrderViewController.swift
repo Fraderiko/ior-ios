@@ -55,11 +55,11 @@ class CreateOrderViewController: UIViewController, UITableViewDelegate, UITableV
         
         if let type = Settings.userType() {
             if type == .Employee {
-                if order["number"] as? String ?? "" != "" && order["type"] as? String ?? "" != "" && order["client"] as? String ?? "" != "" {
+                if order["type"] as? String ?? "" != "" && order["client"] as? String ?? "" != "" {
                     saveButton.isHidden = false
                 }
             } else {
-                if order["number"] as? String ?? "" != "" && order["type"] as? String ?? "" != "" && order["assignedTo"] as? String ?? "" != "" {
+                if order["type"] as? String ?? "" != "" && order["assignedTo"] as? String ?? "" != "" {
                     saveButton.isHidden = false
                 }
             }
@@ -116,7 +116,7 @@ class CreateOrderViewController: UIViewController, UITableViewDelegate, UITableV
         
         viewModel.getGroup(_id: getClientID()) { (groupID) in
             guard let index = self.orderTemplates.index(where: { $0.name == self.order["type"] as? String ?? "" }) else { return }
-            let orderTemplate = NewOrder(number: (self.order["number"] as? String ?? "") + "-" + self.randomString(length:5),
+            let orderTemplate = NewOrder(number: self.getNumber(),
                                                     date: Date().timeIntervalSince1970.rounded() * 1000,
                                                     updated: Date().timeIntervalSince1970.rounded() * 1000,
                                                     type: self.orderTemplates[index]._id,
@@ -146,6 +146,20 @@ class CreateOrderViewController: UIViewController, UITableViewDelegate, UITableV
                 }
 
             })
+        }
+    }
+    
+    func getNumber() -> String {
+        
+        if self.order["number"] as? String ?? "" != "" {
+            return (self.order["number"] as? String ?? "") + "-" + self.randomString(length:5)
+        } else {
+            let date = NSDate()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "ddMM"
+            let dateString = dateFormatter.string(from:date as Date)
+            
+            return dateString + "-" + self.randomString(length:5)
         }
     }
     
@@ -206,7 +220,7 @@ extension CreateOrderViewController {
             cell.textLabel?.text = "Номер"
             cell.accessoryType = .disclosureIndicator
             if order["number"] as? String ?? "" == ""  {
-                cell.detailTextLabel?.text = "Укажите номер"
+                cell.detailTextLabel?.text = "Может быть пустым, присвоится автоматически"
             } else {
                 cell.detailTextLabel?.text = order["number"] as? String ?? ""
             }

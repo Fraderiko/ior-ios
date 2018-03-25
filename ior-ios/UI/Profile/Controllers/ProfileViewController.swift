@@ -28,6 +28,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                     newOrdersPushSwitch.isOn = user.new_orders_notification
                 }
             }
+            
+            newChatSwitch.isOn = user.new_chat_notification
         }
     }
     
@@ -141,6 +143,21 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
+    lazy var newChatSwitch: UISwitch = {
+        var view = UISwitch()
+        view.addTarget(self, action: #selector(newChatSwitchHandler(_:)), for: .valueChanged)
+        return view
+    }()
+    
+    lazy var newChatLabel: UILabel = {
+        var label = UILabel()
+        label.textAlignment = .left
+        label.text = "Присылать почтовые уведомления о новых сообщениях в чате"
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     lazy var newOrdersPushLabel: UILabel = {
         var label = UILabel()
         label.textAlignment = .left
@@ -185,6 +202,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         guard let user = user else { return }
         let result = sender.isOn
         user.new_orders_notification = result
+        saveButton.isHidden = false
+    }
+    
+    @objc func newChatSwitchHandler(_ sender: UISwitch) {
+        guard let user = user else { return }
+        let result = sender.isOn
+        user.new_chat_notification = result
         saveButton.isHidden = false
     }
     
@@ -266,6 +290,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(nameLabel)
         view.addSubview(phoneLabel)
         view.addSubview(mailLabel)
+        view.addSubview(newChatSwitch)
+        view.addSubview(newChatLabel)
         if let type = Settings.userType() {
             if type == .Client {
                 view.addSubview(newStatusesLabel)
@@ -273,8 +299,19 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                 view.addSubview(newStatusesPushLabel)
                 view.addSubview(newStatusesPushSwitch)
                 
-                newStatusesLabel.snp.makeConstraints({ make in
+                newChatLabel.snp.makeConstraints({ make in
                     make.top.equalTo(self.phoneTextField.snp.bottom).offset(40)
+                    make.left.equalTo(self.view.snp.left).offset(40)
+                    make.right.equalTo(self.view.snp.right).offset(-100)
+                })
+                
+                newChatSwitch.snp.makeConstraints({ make in
+                    make.centerY.equalTo(self.newChatLabel.snp.centerY)
+                    make.right.equalTo(self.view.snp.right).offset(-40)
+                })
+                
+                newStatusesLabel.snp.makeConstraints({ make in
+                    make.top.equalTo(self.newChatLabel.snp.bottom).offset(40)
                     make.left.equalTo(self.view.snp.left).offset(40)
                     make.right.equalTo(self.view.snp.right).offset(-100)
                 })
@@ -294,14 +331,26 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
                     make.centerY.equalTo(self.newStatusesPushLabel.snp.centerY)
                     make.right.equalTo(self.view.snp.right).offset(-40)
                 })
+                
             } else {
                 view.addSubview(newOrdersLabel)
                 view.addSubview(newOrdersSwitch)
                 view.addSubview(newOrdersPushLabel)
                 view.addSubview(newOrdersPushSwitch)
                 
-                newOrdersLabel.snp.makeConstraints({ make in
+                newChatLabel.snp.makeConstraints({ make in
                     make.top.equalTo(self.phoneTextField.snp.bottom).offset(40)
+                    make.left.equalTo(self.view.snp.left).offset(40)
+                    make.right.equalTo(self.view.snp.right).offset(-100)
+                })
+                
+                newChatSwitch.snp.makeConstraints({ make in
+                    make.centerY.equalTo(self.newChatLabel.snp.centerY)
+                    make.right.equalTo(self.view.snp.right).offset(-40)
+                })
+                
+                newOrdersLabel.snp.makeConstraints({ make in
+                    make.top.equalTo(self.newChatLabel.snp.bottom).offset(40)
                     make.left.equalTo(self.view.snp.left).offset(40)
                     make.right.equalTo(self.view.snp.right).offset(-100)
                 })

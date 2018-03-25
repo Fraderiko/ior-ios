@@ -178,7 +178,7 @@ class MediaFieldViewController: UIViewController, UITableViewDelegate, UITableVi
             
             viewModel.upload(mode: .Image, image: image, onProgress: { (progress) in
                 SVProgressHUD.setDefaultMaskType(.black)
-                SVProgressHUD.showProgress(Float(progress))
+                SVProgressHUD.showProgress(Float(progress), status:  String(format: "%.0f", progress * 100) + " %")
             }) { (success) in
                 SVProgressHUD.dismiss()
             }
@@ -202,7 +202,7 @@ class MediaFieldViewController: UIViewController, UITableViewDelegate, UITableVi
                     
                     viewModel.upload(mode: .Video, videoURL: url, image: nil, onProgress: { (progress) in
                         SVProgressHUD.setDefaultMaskType(.black)
-                        SVProgressHUD.showProgress(Float(progress))
+                        SVProgressHUD.showProgress(Float(progress), status:  String(format: "%.0f" + " %", progress * 100)  + " %")
                     }, completion: { (success) in
                         SVProgressHUD.dismiss()
                     })

@@ -16,6 +16,7 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var completion: (() -> ())?
     var keyboardDidShow: Bool = false
     var userCanEditOrder: Bool = false
+    var userCanCancel: Bool = false
     
     var discussionCompletion: (() -> ())?
     
@@ -42,6 +43,7 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
         button.addTarget(self, action: #selector(cancelOrder(_:)), for: .touchUpInside)
         button.backgroundColor = UIColor.blue
         button.setTitleColor(.white, for: .normal)
+        button.isHidden = true
         return button
     }()
     
@@ -59,8 +61,13 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setupViews()
         title = order?.number
         setupKeyboardNotifications()
-        viewModel.getUserEditPermission { (userCanEditOrder) in
+        viewModel.getUserPermissions { (userCanEditOrder, userCanCancel) in
             self.userCanEditOrder = userCanEditOrder
+            self.userCanCancel = userCanCancel
+            
+            if (userCanCancel) {
+                self.cancelButton.isHidden = false
+            }
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Чат", style: .done, target: self, action: #selector(showChat))

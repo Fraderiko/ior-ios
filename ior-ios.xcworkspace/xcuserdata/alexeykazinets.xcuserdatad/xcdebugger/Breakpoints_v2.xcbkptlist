@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ior-ios/UI/Order/ViewModel/OrderViewModel.swift"
-            timestampString = "535832428.472825"
+            timestampString = "542569753.3941489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ior-ios/UI/Order/ViewModel/OrderViewModel.swift"
-            timestampString = "535832428.472877"
+            timestampString = "542569753.394971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -226,11 +226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ior-ios/UI/CreateOrder/Controllers/CreateOrderViewController.swift"
-            timestampString = "540651772.623214"
+            timestampString = "543585753.915388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -258,7 +258,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ior-ios/UI/CreateOrder/Controllers/CreateOrderViewController.swift"
-            timestampString = "540651772.62334"
+            timestampString = "543585753.915483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
@@ -408,6 +408,22 @@
             startingLineNumber = "143"
             endingLineNumber = "143"
             landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ior-ios/UI/Order/ViewModel/OrderViewModel.swift"
+            timestampString = "542569753.396474"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "getUserEditPermission(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
